@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'sonner';
 import { queryClient } from '@/lib/queryClient';
 import { useAuthStore } from '@/store/useAuthStore';
+import { supabaseMisconfigured } from '@/lib/supabase';
 import Header from '@/components/layout/Header';
 import CartDrawer from '@/components/cart/CartDrawer';
 import ErrorBoundary from '@/components/system/ErrorBoundary';
@@ -44,6 +45,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
       <div className="flex min-h-screen flex-col bg-gourmet-bg text-gourmet-cream">
+        {/* Environment variable warning — shown when Supabase is not configured */}
+        {supabaseMisconfigured && (
+          <div className="sticky top-0 z-[9999] bg-yellow-500 px-4 py-2.5 text-center text-sm font-bold text-black">
+            ⚠️ Supabase is not configured. Add{' '}
+            <code className="rounded bg-black/15 px-1">VITE_SUPABASE_URL</code> and{' '}
+            <code className="rounded bg-black/15 px-1">VITE_SUPABASE_PUBLISHABLE_KEY</code>{' '}
+            to your Vercel project settings, then redeploy.
+          </div>
+        )}
         <Header />
         <main className="flex-grow">
           <ErrorBoundary>
