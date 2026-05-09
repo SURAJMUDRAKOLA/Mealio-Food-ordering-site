@@ -1,0 +1,24 @@
+// Shared CORS headers — required for browser requests to Supabase Edge Functions
+// Include in every function that is called from the browser.
+
+export const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
+/** Returns a CORS preflight response (handles browser OPTIONS requests) */
+export function handleCors(req: Request): Response | null {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: corsHeaders });
+  }
+  return null;
+}
+
+/** Wraps a JSON body in a Response with correct headers */
+export function json(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}

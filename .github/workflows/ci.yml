@@ -1,0 +1,54 @@
+name: CI
+
+# Triggers: every push to main and every PR targeting main
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Lint → Type-check → Test → Build
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout code ──────────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Setup Node.js 20 (LTS) with npm cache ──────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # ── 3. Clean install — uses package-lock.json for reproducible builds ─────
+      - name: Install dependencies
+        run: npm ci
+
+      # ── 4. Lint — fails CI on ESLint errors ───────────────────────────────────
+      - name: Lint
+        run: npm run lint
+
+      # ── 5. Type-check — fails CI on TypeScript errors ─────────────────────────
+      - name: Type check
+        run: npm run type-check
+
+      # ── 6. Unit tests — fails CI if any test fails ────────────────────────────
+      - name: Test
+        run: npm run test
+
+      # ── 7. Production build — validates bundling + PWA generation ─────────────
+      - name: Build
+        run: npm run build
+        env:
+          # Supabase credentials (add these in GitHub → Settings → Secrets)
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          # Sentry (optional — if not set, Sentry is silently skipped)
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          # Build version tag (set automatically from Git SHA)
+          VITE_APP_VERSION: ${{ github.sha }}
