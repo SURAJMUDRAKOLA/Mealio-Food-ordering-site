@@ -13,6 +13,7 @@ interface ImportMeta {
 
 
 declare module 'animejs/lib/anime.es.js' {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const anime: typeof import('animejs');
   export default anime;
 }

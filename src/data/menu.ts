@@ -1,4 +1,4 @@
-import { MenuItem, Category } from '../types';
+import type { MenuItem, Category } from '../types';
 
 const images = {
   northIndian: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=80',

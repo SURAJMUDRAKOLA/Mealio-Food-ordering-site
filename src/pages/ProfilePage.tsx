@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, LogOut, MapPin, Package, User } from 'lucide-react';
@@ -29,8 +29,10 @@ const ProfilePage: React.FC = () => {
   const [editPhone, setEditPhone] = useState(profile?.phone ?? '');
   const [editing, setEditing] = useState(false);
 
-  // Redirect if not logged in
-  if (!user) { navigate('/login'); return null; }
+  // Redirect if not logged in — using useEffect to avoid calling hooks after early return
+  useEffect(() => {
+    if (!user) navigate('/login');
+  }, [user, navigate]);
 
   // Fetch order history — only runs when user is present
   const { data: orders = [], isLoading: loadingOrders } = useQuery({

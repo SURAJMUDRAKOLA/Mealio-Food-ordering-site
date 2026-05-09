@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Category } from '../../types';
+import type { Category } from '../../types';
 
 interface CategoryCardProps {
   category: Category;
