@@ -21,7 +21,7 @@ const menuCatalog: MenuItem[] = [
     name: 'Butter Chicken',
     description: 'Tandoor-roasted chicken simmered in tomato, butter, kasuri methi, and cream.',
     price: 389,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Butter_Chicken_%26_Butter_Naan_-_Home_-_Chandigarh_-_India_-_0006.jpg/960px-Butter_Chicken_%26_Butter_Naan_-_Home_-_Chandigarh_-_India_-_0006.jpg',
+    image: '/images/menu/butter_chicken.png',
     category: 'North Indian',
     popular: true,
     rating: 4.8,
