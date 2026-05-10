@@ -1,10 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, Search, SlidersHorizontal, X } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
 import { menuItems as staticMenuItems, categories } from '@/data/menu';
-import { supabase } from '@/lib/supabase';
-import { queryKeys } from '@/lib/queryClient';
 import type { MenuItem } from '@/types';
 import { useDebounce } from '@/hooks/useDebounce';
 import FoodCard from '@/components/food/FoodCard';
@@ -47,24 +44,9 @@ function dbRowToMenuItem(row: Record<string, unknown>): MenuItem {
 
 
 const MenuPage: React.FC = () => {
-  // useQuery: placeholderData = instant render from static file
-  // When DB responds, data swaps in silently — no loading flash
-  const { data: menuItems = staticMenuItems } = useQuery({
-    queryKey: queryKeys.menuItems(),
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('menu_items')
-        .select('*')
-        .eq('is_available', true);
-      if (error) throw error;
-      // If DB has no rows yet, fall back to static data
-      return data && data.length > 0
-        ? data.map((r) => dbRowToMenuItem(r as Record<string, unknown>))
-        : staticMenuItems;
-    },
-    placeholderData: staticMenuItems, // shown instantly while query runs
-    staleTime: 5 * 60 * 1000,        // menu is fresh for 5 min
-  });
+  // Always use static menu data from menu.ts — this is the single source of truth.
+  // Supabase DB may have stale/fewer items, so we skip the DB query for menu display.
+  const menuItems = staticMenuItems;
 
   // Derived from query data — updates automatically when DB data loads
   const { lowestPrice, highestPrice } = useMemo(
