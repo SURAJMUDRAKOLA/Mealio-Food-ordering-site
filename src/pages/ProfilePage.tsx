@@ -29,15 +29,11 @@ const ProfilePage: React.FC = () => {
   const [editPhone, setEditPhone] = useState(profile?.phone ?? '');
   const [editing, setEditing] = useState(false);
 
-  // Redirect if not logged in — using useEffect to avoid calling hooks after early return
-  useEffect(() => {
-    if (!user) navigate('/login');
-  }, [user, navigate]);
-
-  // Fetch order history — only runs when user is present
+  // Fetch order history — only runs when user is authenticated
   const { data: orders = [], isLoading: loadingOrders } = useQuery({
-    queryKey: queryKeys.orders(user.id),
+    queryKey: queryKeys.orders(user?.id ?? ''),
     queryFn: async () => {
+      if (!user) return [];
       const { data, error } = await supabase
         .from('orders')
         .select('*')
@@ -55,16 +51,40 @@ const ProfilePage: React.FC = () => {
       const { error } = await supabase
         .from('profiles')
         .update(updates)
-        .eq('id', user.id);
+        .eq('id', user?.id);
       if (error) throw error;
     },
     onSuccess: () => {
       // Invalidate so the auth store re-reads fresh profile data
-      void qc.invalidateQueries({ queryKey: queryKeys.profile(user.id) });
+      void qc.invalidateQueries({ queryKey: queryKeys.profile(user?.id ?? '') });
       setEditing(false);
     },
   });
 
+  // 🔒 Not logged in — show a beautiful login prompt instead of crashing
+  if (!user) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gourmet-bg px-4 text-center">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-gourmet-line bg-gourmet-surface shadow-card">
+          <User size={36} className="text-gourmet-muted" />
+        </div>
+        <div>
+          <h1 className="font-display text-3xl font-bold text-gourmet-cream">You're not signed in</h1>
+          <p className="mt-2 text-gourmet-muted">Please log in or create an account to view your profile.</p>
+        </div>
+        <div className="flex gap-3">
+          <Button variant="primary" onClick={() => navigate('/login')}>
+            Log In
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/signup')}>
+            Sign Up
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // Profile loading (user is authenticated but profile not yet fetched)
   if (!profile) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gourmet-bg">
