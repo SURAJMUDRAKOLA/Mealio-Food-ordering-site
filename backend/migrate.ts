@@ -32,9 +32,9 @@ ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, image_url=EXCLUDED.image_url;
 
 INSERT INTO public.menu_items (id,name,description,price,image_url,category_id,is_veg,is_popular,rating,prep_time,tag) VALUES
 ('north-001','Butter Chicken','Tandoor-roasted chicken in tomato, butter, kasuri methi, and cream.',389,'/images/menu/butter_chicken.png','north-indian',false,true,4.8,'28 min','Delhi classic'),
-('north-002','Paneer Butter Masala','Soft paneer in rich makhani gravy with smoked finish.',319,'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=80','north-indian',true,true,4.7,'24 min','Creamy'),
-('north-003','Dal Makhani','Black lentils slow-cooked with butter, cream, and Punjabi spices.',249,'https://images.unsplash.com/photo-1565557623262-b51c2513a641a?auto=format&fit=crop&w=900&q=80','north-indian',true,false,4.7,'22 min','Slow cooked'),
-('north-004','Chicken Tikka Masala','Charred tikka in spiced onion-tomato gravy.',379,'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=80','north-indian',false,false,4.6,'27 min','Tikka gravy'),
+('north-002','Paneer Butter Masala','Soft paneer in rich makhani gravy with smoked finish.',319,'/images/menu/paneer_butter_masala.png','north-indian',true,true,4.7,'24 min','Creamy'),
+('north-003','Dal Makhani','Black lentils slow-cooked with butter, cream, and Punjabi spices.',249,'/images/menu/dal_makhani.png','north-indian',true,false,4.7,'22 min','Slow cooked'),
+('north-004','Chicken Tikka Masala','Charred tikka in spiced onion-tomato gravy.',379,'/images/menu/chicken_tikka_masala.png','north-indian',false,false,4.6,'27 min','Tikka gravy'),
 ('north-005','Chole Bhature','Amritsari chole with two fluffy bhature, pickle, and onion.',189,'https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?auto=format&fit=crop&w=900&q=80','north-indian',true,true,4.6,'18 min','Punjabi'),
 ('north-006','Rajma Chawal','Home-style kidney bean curry over steamed basmati with salad.',179,'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80','north-indian',true,false,4.4,'16 min','Comfort bowl'),
 ('north-007','Kadhai Paneer','Paneer tossed with capsicum, onion, tomato, and crushed kadhai masala.',329,'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=80','north-indian',true,false,4.5,'23 min','Spiced'),
