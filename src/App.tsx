@@ -50,7 +50,7 @@ function App() {
           <div className="sticky top-0 z-[9999] bg-yellow-500 px-4 py-2.5 text-center text-sm font-bold text-black">
             ⚠️ Supabase is not configured. Add{' '}
             <code className="rounded bg-black/15 px-1">VITE_SUPABASE_URL</code> and{' '}
-            <code className="rounded bg-black/15 px-1">VITE_SUPABASE_PUBLISHABLE_KEY</code>{' '}
+            <code className="rounded bg-black/15 px-1">VITE_SUPABASE_ANON_KEY</code>{' '}
             to your Vercel project settings, then redeploy.
           </div>
         )}

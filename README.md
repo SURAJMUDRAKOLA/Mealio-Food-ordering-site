@@ -232,7 +232,7 @@ UPDATE public.orders SET status = 'delivered'        WHERE id = 'your-order-id';
 | Variable | Required | Description |
 |---|---|---|
 | `VITE_SUPABASE_URL` | ✅ | Your Supabase project URL |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | ✅ | Supabase publishable (anon) key |
+| `VITE_SUPABASE_ANON_KEY` | ✅ | Supabase publishable (anon) key |
 | `DATABASE_URL` | For migrate script | Direct PostgreSQL connection string |
 | `SUPABASE_SERVICE_ROLE_KEY` | For seed script | Service role key (bypasses RLS) |
 
