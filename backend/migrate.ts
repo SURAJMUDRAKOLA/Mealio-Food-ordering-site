@@ -18,7 +18,7 @@ const seedSQL = `
 INSERT INTO public.categories (id, name, image_url, sort_order) VALUES
 ('north-indian','North Indian','https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=80',1),
 ('south-indian','South Indian','https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=900&q=80',2),
-('biryani','Biryani','https://images.unsplash.com/photo-1563379091339-03246963d4d9?auto=format&fit=crop&w=900&q=80',3),
+('biryani','Biryani','https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=900&q=80',3),
 ('meals-thali','Meals & Thali','https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80',4),
 ('street-food','Street Food','https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80',5),
 ('tandoor-kebabs','Tandoor & Kebabs','https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=80',6),
@@ -26,7 +26,7 @@ INSERT INTO public.categories (id, name, image_url, sort_order) VALUES
 ('chinese','Chinese','https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=80',8),
 ('italian','Italian','https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80',9),
 ('rolls-wraps','Rolls & Wraps','https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=900&q=80',10),
-('desserts','Desserts','https://images.unsplash.com/photo-1605190557072-7abf6e76dfaa?auto=format&fit=crop&w=900&q=80',11),
+('desserts','Desserts','https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80',11),
 ('beverages','Beverages','https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=80',12)
 ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, image_url=EXCLUDED.image_url;
 
@@ -42,7 +42,7 @@ INSERT INTO public.menu_items (id,name,description,price,image_url,category_id,i
 ('south-002','Idli Vada Combo','Two steamed idlis, medu vada, coconut chutney, and sambar.',129,'https://upload.wikimedia.org/wikipedia/commons/1/11/Idli_Sambar.JPG','south-indian',true,true,4.5,'12 min','Breakfast'),
 ('south-003','Ghee Podi Dosa','Roasted dosa with ghee and spicy podi, served with sambar.',179,'https://upload.wikimedia.org/wikipedia/commons/9/9f/Dosa_at_Sri_Ganesha_Restauran%2C_Bangkok_%2844570742744%29.jpg','south-indian',true,false,4.6,'16 min','Ghee roast'),
 ('south-004','Mysore Masala Dosa','Dosa layered with red chutney and potato masala.',169,'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=900&q=80','south-indian',true,false,4.6,'17 min','Mysore style'),
-('bir-001','Hyderabadi Chicken Dum Biryani','Dum-cooked basmati layered with chicken, saffron, raita, and salan.',329,'https://images.unsplash.com/photo-1563379091339-03246963d4d9?auto=format&fit=crop&w=900&q=80','biryani',false,true,4.8,'32 min','Bestseller'),
+('bir-001','Hyderabadi Chicken Dum Biryani','Dum-cooked basmati layered with chicken, saffron, raita, and salan.',329,'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=900&q=80','biryani',false,true,4.8,'32 min','Bestseller'),
 ('bir-002','Mutton Dum Biryani','Tender mutton and long-grain rice sealed with spices and dum heat.',449,'https://images.unsplash.com/photo-1642821373181-696a54913e93?auto=format&fit=crop&w=900&q=80','biryani',false,true,4.7,'38 min','Premium'),
 ('bir-003','Veg Dum Biryani','Layered basmati with vegetables, mint, fried onion, raita, and salan.',249,'https://upload.wikimedia.org/wikipedia/commons/c/c8/Biryani_of_Lahore.jpg','biryani',true,false,4.4,'28 min','Dum style'),
 ('bir-004','Kolkata Chicken Biryani','Lightly spiced biryani with chicken, potato, egg, and fragrant rice.',349,'https://upload.wikimedia.org/wikipedia/commons/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg','biryani',false,false,4.6,'34 min','Kolkata'),
