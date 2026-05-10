@@ -18,7 +18,13 @@ function formatCardNumber(val: string) {
   return val.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
 }
 function formatExpiry(val: string) {
-  const digits = val.replace(/\D/g, '').slice(0, 4);
+  let digits = val.replace(/\D/g, '').slice(0, 4);
+  if (digits.length >= 2) {
+    let month = parseInt(digits.slice(0, 2), 10);
+    if (month > 12) month = 12;
+    if (month === 0 && digits.length === 2) month = 1;
+    digits = month.toString().padStart(2, '0') + digits.slice(2);
+  }
   return digits.length > 2 ? `${digits.slice(0, 2)}/${digits.slice(2)}` : digits;
 }
 
@@ -162,7 +168,7 @@ const MockRazorpayModal: React.FC<Props> = ({ amount, onSuccess, onClose }) => {
                   <label className="mb-1.5 block text-xs font-semibold text-gourmet-muted">CVV</label>
                   <input
                     value={cvv}
-                    onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                    onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
                     placeholder="•••"
                     type="password"
                     className="w-full rounded-md border border-gourmet-line bg-gourmet-bg px-4 py-3 font-mono text-sm text-gourmet-cream placeholder:text-gourmet-dim outline-none focus:border-gourmet-primary transition-colors"

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/mealio_banner_wide.png" alt="Mealio Banner" width="100%" />
+  <img src="./assets/mealio_banner_wide_cropped.png" alt="Mealio Banner" width="100%" />
 </div>
 
 # 🔥 Mealio — Dark Gourmet Food Delivery
