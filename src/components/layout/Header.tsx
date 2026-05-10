@@ -71,7 +71,7 @@ const Header: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
+                className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-colors duration-200 ${
                   isActive ? 'text-gourmet-bg' : 'text-gourmet-muted hover:text-gourmet-cream'
                 }`}
               >
@@ -79,7 +79,7 @@ const Header: React.FC = () => {
                   <motion.span
                     layoutId="active-nav-pill"
                     className="absolute inset-0 rounded-full bg-gourmet-accent"
-                    transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
                 <span className="relative z-10">{link.name}</span>

@@ -22,9 +22,10 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ variant = 'hero', class
     const renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
-      antialias: true,
+      antialias: false,
+      powerPreference: 'high-performance',
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(1);
 
     const count = variant === 'auth' ? 620 : 920;
     const positions = new Float32Array(count * 3);
