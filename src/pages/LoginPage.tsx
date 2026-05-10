@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import anime from 'animejs/lib/anime.es.js';
-import { Flame, Mail, ShieldCheck } from 'lucide-react';
+import { Flame, Mail, ShieldCheck, Eye, EyeOff } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
@@ -20,6 +20,7 @@ const GoogleIcon = () => (
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
   const [errors, setErrors] = React.useState<{ email?: string; password?: string }>({});
   const cardRef = useRef<HTMLDivElement | null>(null);
 
@@ -115,8 +116,18 @@ const LoginPage: React.FC = () => {
           <form className="space-y-5" onSubmit={handleSubmit}>
             <Input id="email" name="email" type="email" autoComplete="email" label="Email address"
               value={email} onChange={(e) => setEmail(e.target.value)} error={errors.email} fullWidth />
-            <Input id="password" name="password" type="password" autoComplete="current-password" label="Password"
-              value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} fullWidth />
+            <div className="relative">
+              <Input id="password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" label="Password"
+                value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} fullWidth />
+              <button
+                type="button"
+                onClick={() => setShowPassword((p) => !p)}
+                className="absolute right-3 top-9 text-gourmet-muted transition-colors hover:text-gourmet-cream"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
 
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 text-gourmet-muted">
