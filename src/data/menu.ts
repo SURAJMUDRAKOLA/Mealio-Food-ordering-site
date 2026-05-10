@@ -1022,15 +1022,4 @@ const menuCatalog: MenuItem[] = [
   },
 ];
 
-const categoryImageIndexes: Record<string, number> = {};
-
-export const menuItems: MenuItem[] = menuCatalog.map((item) => {
-  const pool = dishImagePools[item.category] ?? [item.image];
-  const imageIndex = categoryImageIndexes[item.category] ?? 0;
-  categoryImageIndexes[item.category] = imageIndex + 1;
-
-  return {
-    ...item,
-    image: pool[imageIndex % pool.length] ?? item.image,
-  };
-});
+export const menuItems: MenuItem[] = menuCatalog;
