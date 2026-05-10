@@ -12,6 +12,16 @@
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-Animations-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 ![Zustand](https://img.shields.io/badge/Zustand-State-FF6B35?style=for-the-badge)
 
+## 📸 Screenshots
+*(Coming soon: Drop your screenshots into the `assets` folder!)*
+<!-- 
+Uncomment these lines once you take the screenshots:
+![Home / 3D Hero](./assets/screenshot-home.png)
+![Menu Grid & Filters](./assets/screenshot-menu.png)
+![Razorpay Payment Modal](./assets/screenshot-payment.png)
+![Live Order Tracking](./assets/screenshot-tracking.png)
+-->
+
 ```
 Vite + React + TypeScript  ──►  Zustand Stores  ──►  Supabase Auth  ──►  PostgreSQL DB
         ↓                              ↓                    ↓                   ↓
