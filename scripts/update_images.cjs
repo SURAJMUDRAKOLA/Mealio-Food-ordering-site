@@ -82,7 +82,6 @@ async function run() {
   console.log('Fetching verified Wikimedia Commons images...');
   const resolvedMap = {};
   
-  // Fallbacks in case Wikipedia fails
   const fallbacks = {
     'Butter Chicken': 'https://upload.wikimedia.org/wikipedia/commons/4/41/Butter_Chicken_%26_Butter_Naan_-_Home_-_Chandigarh_-_India_-_0006.jpg',
     'Masala Dosa': 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Dosa_at_a_street_vendor_in_India.jpg',
@@ -107,7 +106,8 @@ async function run() {
         return match;
       });
     } else {
-      return content.replace(/(\('[^']+',\s*'([^']+)'(?:,[^,]+){2},)\s*'[^']+'/g, (match, prefix, name) => {
+      // Improved SQL regex that doesn't break on commas inside descriptions
+      return content.replace(/(\('[^']+',\s*'([^']+)',\s*'[^']*',\s*\d+,\s*)'[^']+'/g, (match, prefix, name) => {
         if (resolvedMap[name]) {
           return `${prefix}'${resolvedMap[name]}'`;
         }
