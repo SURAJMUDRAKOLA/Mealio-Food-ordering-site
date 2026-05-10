@@ -31,7 +31,7 @@ const wikiMap = {
   'Seekh Kebab': 'Seekh_kebab',
   'Afghani Chicken': 'Tandoori_chicken',
   'Goan Fish Curry Rice': 'Fish_curry',
-  'Prawn Ghee Roast': 'Prawn_roast',
+  'Prawn Ghee Roast': 'Shrimp_and_prawn_as_food',
   'Malabar Parotta With Chicken': 'Parotta',
   'Veg Hakka Noodles': 'Hakka_noodles',
   'Chicken Schezwan Noodles': 'Szechuan_cuisine',
@@ -125,28 +125,28 @@ async function run() {
   
   // Replace categories array
   menuContent = menuContent.replace(/export const categories: Category\[\] = \[[\s\S]*?\];\n\n/g, () => {
-    return 'export const categories: Category[] = [\n' +
-      \"  { id: 'north-indian', name: 'North Indian', image: '\" + resolvedMap['North Indian'] + \"' },\n\" +
-      \"  { id: 'south-indian', name: 'South Indian', image: '\" + resolvedMap['South Indian'] + \"' },\n\" +
-      \"  { id: 'biryani', name: 'Biryani', image: '\" + resolvedMap['Biryani'] + \"' },\n\" +
-      \"  { id: 'meals-thali', name: 'Meals & Thali', image: '\" + resolvedMap['Meals & Thali'] + \"' },\n\" +
-      \"  { id: 'street-food', name: 'Street Food', image: '\" + resolvedMap['Street Food'] + \"' },\n\" +
-      \"  { id: 'tandoor-kebabs', name: 'Tandoor & Kebabs', image: '\" + resolvedMap['Tandoor & Kebabs'] + \"' },\n\" +
-      \"  { id: 'coastal', name: 'Coastal', image: '\" + resolvedMap['Coastal'] + \"' },\n\" +
-      \"  { id: 'chinese', name: 'Chinese', image: '\" + resolvedMap['Chinese'] + \"' },\n\" +
-      \"  { id: 'italian', name: 'Italian', image: '\" + resolvedMap['Italian'] + \"' },\n\" +
-      \"  { id: 'rolls-wraps', name: 'Rolls & Wraps', image: '\" + resolvedMap['Rolls & Wraps'] + \"' },\n\" +
-      \"  { id: 'desserts', name: 'Desserts', image: '\" + resolvedMap['Desserts'] + \"' },\n\" +
-      \"  { id: 'beverages', name: 'Beverages', image: '\" + resolvedMap['Beverages'] + \"' },\n\" +
-      '];\n\n';
+    return `export const categories: Category[] = [
+  { id: 'north-indian', name: 'North Indian', image: '${resolvedMap['North Indian']}' },
+  { id: 'south-indian', name: 'South Indian', image: '${resolvedMap['South Indian']}' },
+  { id: 'biryani', name: 'Biryani', image: '${resolvedMap['Biryani']}' },
+  { id: 'meals-thali', name: 'Meals & Thali', image: '${resolvedMap['Meals & Thali']}' },
+  { id: 'street-food', name: 'Street Food', image: '${resolvedMap['Street Food']}' },
+  { id: 'tandoor-kebabs', name: 'Tandoor & Kebabs', image: '${resolvedMap['Tandoor & Kebabs']}' },
+  { id: 'coastal', name: 'Coastal', image: '${resolvedMap['Coastal']}' },
+  { id: 'chinese', name: 'Chinese', image: '${resolvedMap['Chinese']}' },
+  { id: 'italian', name: 'Italian', image: '${resolvedMap['Italian']}' },
+  { id: 'rolls-wraps', name: 'Rolls & Wraps', image: '${resolvedMap['Rolls & Wraps']}' },
+  { id: 'desserts', name: 'Desserts', image: '${resolvedMap['Desserts']}' },
+  { id: 'beverages', name: 'Beverages', image: '${resolvedMap['Beverages']}' },
+];\n\n`;
   });
 
   // Replace menu items images
   menuContent = menuContent.replace(/(name:\s*'([^']+)',[\s\S]*?image:\s*)(images\.[a-zA-Z]+|'[^']+')/g, (match, prefix, name) => {
     if (resolvedMap[name]) {
-      return prefix + \"'\" + resolvedMap[name] + \"'\";
+      return prefix + "'" + resolvedMap[name] + "'";
     }
-    return prefix + \"'\" + resolvedMap['Butter Chicken'] + \"'\"; // generic fallback
+    return prefix + "'" + resolvedMap['Butter Chicken'] + "'";
   });
   
   fs.writeFileSync(menuPath, menuContent);
@@ -156,25 +156,25 @@ async function run() {
   let migrateContent = fs.readFileSync(migratePath, 'utf-8');
   
   // Replace categories in SQL
-  migrateContent = migrateContent.replace(/\('north-indian','North Indian','[^']+',1\)/, \"('north-indian','North Indian','\" + resolvedMap['North Indian'] + \"',1)\");
-  migrateContent = migrateContent.replace(/\('south-indian','South Indian','[^']+',2\)/, \"('south-indian','South Indian','\" + resolvedMap['South Indian'] + \"',2)\");
-  migrateContent = migrateContent.replace(/\('biryani','Biryani','[^']+',3\)/, \"('biryani','Biryani','\" + resolvedMap['Biryani'] + \"',3)\");
-  migrateContent = migrateContent.replace(/\('meals-thali','Meals & Thali','[^']+',4\)/, \"('meals-thali','Meals & Thali','\" + resolvedMap['Meals & Thali'] + \"',4)\");
-  migrateContent = migrateContent.replace(/\('street-food','Street Food','[^']+',5\)/, \"('street-food','Street Food','\" + resolvedMap['Street Food'] + \"',5)\");
-  migrateContent = migrateContent.replace(/\('tandoor-kebabs','Tandoor & Kebabs','[^']+',6\)/, \"('tandoor-kebabs','Tandoor & Kebabs','\" + resolvedMap['Tandoor & Kebabs'] + \"',6)\");
-  migrateContent = migrateContent.replace(/\('coastal','Coastal','[^']+',7\)/, \"('coastal','Coastal','\" + resolvedMap['Coastal'] + \"',7)\");
-  migrateContent = migrateContent.replace(/\('chinese','Chinese','[^']+',8\)/, \"('chinese','Chinese','\" + resolvedMap['Chinese'] + \"',8)\");
-  migrateContent = migrateContent.replace(/\('italian','Italian','[^']+',9\)/, \"('italian','Italian','\" + resolvedMap['Italian'] + \"',9)\");
-  migrateContent = migrateContent.replace(/\('rolls-wraps','Rolls & Wraps','[^']+',10\)/, \"('rolls-wraps','Rolls & Wraps','\" + resolvedMap['Rolls & Wraps'] + \"',10)\");
-  migrateContent = migrateContent.replace(/\('desserts','Desserts','[^']+',11\)/, \"('desserts','Desserts','\" + resolvedMap['Desserts'] + \"',11)\");
-  migrateContent = migrateContent.replace(/\('beverages','Beverages','[^']+',12\)/, \"('beverages','Beverages','\" + resolvedMap['Beverages'] + \"',12)\");
+  migrateContent = migrateContent.replace(/\('north-indian','North Indian','[^']+',1\)/, "('north-indian','North Indian','" + resolvedMap['North Indian'] + "',1)");
+  migrateContent = migrateContent.replace(/\('south-indian','South Indian','[^']+',2\)/, "('south-indian','South Indian','" + resolvedMap['South Indian'] + "',2)");
+  migrateContent = migrateContent.replace(/\('biryani','Biryani','[^']+',3\)/, "('biryani','Biryani','" + resolvedMap['Biryani'] + "',3)");
+  migrateContent = migrateContent.replace(/\('meals-thali','Meals & Thali','[^']+',4\)/, "('meals-thali','Meals & Thali','" + resolvedMap['Meals & Thali'] + "',4)");
+  migrateContent = migrateContent.replace(/\('street-food','Street Food','[^']+',5\)/, "('street-food','Street Food','" + resolvedMap['Street Food'] + "',5)");
+  migrateContent = migrateContent.replace(/\('tandoor-kebabs','Tandoor & Kebabs','[^']+',6\)/, "('tandoor-kebabs','Tandoor & Kebabs','" + resolvedMap['Tandoor & Kebabs'] + "',6)");
+  migrateContent = migrateContent.replace(/\('coastal','Coastal','[^']+',7\)/, "('coastal','Coastal','" + resolvedMap['Coastal'] + "',7)");
+  migrateContent = migrateContent.replace(/\('chinese','Chinese','[^']+',8\)/, "('chinese','Chinese','" + resolvedMap['Chinese'] + "',8)");
+  migrateContent = migrateContent.replace(/\('italian','Italian','[^']+',9\)/, "('italian','Italian','" + resolvedMap['Italian'] + "',9)");
+  migrateContent = migrateContent.replace(/\('rolls-wraps','Rolls & Wraps','[^']+',10\)/, "('rolls-wraps','Rolls & Wraps','" + resolvedMap['Rolls & Wraps'] + "',10)");
+  migrateContent = migrateContent.replace(/\('desserts','Desserts','[^']+',11\)/, "('desserts','Desserts','" + resolvedMap['Desserts'] + "',11)");
+  migrateContent = migrateContent.replace(/\('beverages','Beverages','[^']+',12\)/, "('beverages','Beverages','" + resolvedMap['Beverages'] + "',12)");
   
   // Replace menu items in SQL
   migrateContent = migrateContent.replace(/(\('[^']+',\s*'([^']+)',\s*'[^']*',\s*\d+,\s*)'[^']+'/g, (match, prefix, name) => {
     if (resolvedMap[name]) {
-      return prefix + \"'\" + resolvedMap[name] + \"'\";
+      return prefix + "'" + resolvedMap[name] + "'";
     }
-    return prefix + \"'\" + resolvedMap['Butter Chicken'] + \"'\";
+    return prefix + "'" + resolvedMap['Butter Chicken'] + "'";
   });
 
   fs.writeFileSync(migratePath, migrateContent);
