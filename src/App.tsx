@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'sonner';
 import { queryClient } from '@/lib/queryClient';
 import { useAuthStore } from '@/store/useAuthStore';
-import { supabaseMisconfigured } from '@/lib/supabase';
+
 import Header from '@/components/layout/Header';
 import CartDrawer from '@/components/cart/CartDrawer';
 import ErrorBoundary from '@/components/system/ErrorBoundary';
