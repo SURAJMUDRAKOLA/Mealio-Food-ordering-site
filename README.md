@@ -1,6 +1,6 @@
 <div align="center">
-
-<img src="./assets/mealio_banner.png" alt="Mealio Dark Gourmet Banner" width="100%" onerror="this.style.display='none'" />
+  <img src="./assets/mealio_banner_wide.png" alt="Mealio Banner" width="100%" />
+</div>
 
 # 🔥 Mealio — Dark Gourmet Food Delivery
 ### A full-stack food ordering platform with real-time order tracking and mock payment
