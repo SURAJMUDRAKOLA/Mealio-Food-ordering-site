@@ -21,26 +21,6 @@ const sortComparators: Record<SortMode, (a: MenuItem, b: MenuItem) => number> = 
   'price-high': (a, b) => b.price - a.price,
 };
 
-// Maps a Supabase DB row → the MenuItem shape used throughout the frontend
-function dbRowToMenuItem(row: Record<string, unknown>): MenuItem {
-  return {
-    id: row.id as string,
-    name: row.name as string,
-    description: (row.description as string) ?? '',
-    price: row.price as number,
-    image: row.image_url as string,
-    // category_id uses slug format (e.g. 'north-indian') → display name ('North Indian')
-    category:
-      (row.category_id as string)
-        ?.replace(/-/g, ' ')
-        .replace(/\b\w/g, (c) => c.toUpperCase()) ?? '',
-    popular: (row.is_popular as boolean) ?? false,
-    rating: (row.rating as number) ?? undefined,
-    prepTime: (row.prep_time as string) ?? undefined,
-    isVeg: (row.is_veg as boolean) ?? true,
-    tag: (row.tag as string) ?? undefined,
-  };
-}
 
 
 const MenuPage: React.FC = () => {
